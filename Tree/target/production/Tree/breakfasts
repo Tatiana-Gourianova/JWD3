@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<breakfasts>
+    <breakfast name="1. Belgian Waffles" price="$5.95"/>
+    <breakfast name="2. Strawberry Belgian Waffles" price="$7.97"/>
+</breakfasts>
