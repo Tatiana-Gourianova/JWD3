@@ -19,21 +19,26 @@ public class XMLParser {
     private Stack<String> tagStack = new Stack<String>();
    private LinkedList<Node> nodeList = new LinkedList<Node>();
 private ArrayList<String> arrayList=new ArrayList<>();
+private String CloseTags;
 private     Node node;
 public Node getNode(){
     return node;
 }
-
+public String getCloseTags(){
+    return CloseTags;
+}
 //public ArrayList<Node> getNodeLuist(){
   //  return nodeList;
 //}
+    public ArrayList<String> getArrayList(){
+    return arrayList;
+    }
     public void parseOpenTag(String xmlInfo) {
 String st="";
         Pattern xmlPatternStart = Pattern.compile("<[^/>]+>");
         Matcher xmlMatcher = xmlPatternStart.matcher(xmlInfo);
         String openTag;
-int i=0;
-        while (xmlMatcher.find()) {i++;
+int i=0; while (xmlMatcher.find()) {i++;
             int start = xmlMatcher.start();
             int end = xmlMatcher.end();
             openTag = xmlInfo.substring(start, end);
@@ -42,25 +47,33 @@ int i=0;
             st=st.replace("]","");
             st=st.replace("<","</");
             //if (xmlInform.contains("/"+tagStack)){
-           System.out.println(st+i);
+            //  System.out.println(st+i);
 
             int end2 =xmlInfo.indexOf(st);
-         //   Node node = new Node(tagStack,xmlInform.substring(start+end,end2-1));// = new Node(tagStack,xmlInform.substring(start+end,end2));
-           // nodeList.add(node);
+            //   Node node = new Node(tagStack,xmlInform.substring(start+end,end2-1));// = new Node(tagStack,xmlInform.substring(start+end,end2));
+            // nodeList.add(node);
             arrayList.add(xmlInfo.substring(start,end2+end+1));
 //        }
 
+
 } System.out.println("!!"+st);//выводит на экран закрывающие тэги !!!! переписать? чтобы по закрывающему тегу находило содержимое
+     this.CloseTags=st;
+
        for (String st2:arrayList){
-        System.out.println(st2);//c st2[1] выводит на экран открывающие тэги = по функции Node.get() вывести содержимое!!!!
-    }}
+        System.out.println("+++"+st2);//c st2[1] выводит на экран открывающие тэги = по функции Node.get() вывести содержимое!!!!
+
+         boolean isSingleTag= (st2.lastIndexOf('<')==0);
+   //      System.out.print(isSingleTag+" "+(int)st2.lastIndexOf('<'));
+
+
+       }}
 
     public static void main(String[] args) throws IOException {
         PersonalExample example=new PersonalExample( "XMLinOneLine");
 
         List<String> list= example.getSt();
 
-        System.out.println(list);
+        System.out.println("+++"+list);
         XMLParser parser=new XMLParser();
         parser.parseOpenTag(list.toString());
        // if(parser.getNode().getLinkedList()!=null)
