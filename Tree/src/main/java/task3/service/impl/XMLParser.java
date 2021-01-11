@@ -1,9 +1,7 @@
 package task3.service.impl;
 
 
-
 import java.util.ArrayList;
-
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -36,10 +34,7 @@ public ArrayList<String> getCloseTags(){
             arrayList.add(st);
         }
         OpenTags=arrayList;
- //       OpenTags=arrayList.toString();
-  //      OpenTags = OpenTags.replace("]", "");
-   //     OpenTags = OpenTags.replace("[", "");
-    //    System.out.print("\n VVV"+OpenTags);
+
 }
 
 
@@ -58,9 +53,6 @@ public ArrayList<String> getCloseTags(){
         }
 
         CloseTags=arrayList;
-        //CloseTags=CloseTags.replace("[","");
-        //CloseTags=CloseTags.replace("]","");
 
-//System.out.print("\n VVV++"+CloseTags+"\n ++");
     }
 }

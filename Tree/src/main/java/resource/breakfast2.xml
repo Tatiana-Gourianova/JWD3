@@ -1,8 +1,8 @@
 <breakfast-menu>
-    <food id="1">
+    <foods id="1">
         <name>Belgian Waffles</name>
         <price>$5.9598</price>
-    </food>
+    </foods>
     <food id="2">
         <name>Strawberry 
 Belgian Waffles</name>
