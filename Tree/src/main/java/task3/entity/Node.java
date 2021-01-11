@@ -68,7 +68,8 @@ public class Node<T1, T2, T3> {//abstract?
     public void printText(){
         LinkedList<Node> linkedList2 = (LinkedList<Node>) this.getLinkedList().clone();
         for (Node node : linkedList2) {
-            System.out.print(node.getText()+ "" );
+            if (node.text.toString().contains("<")!=true)
+            System.out.print(" "+ node.getText()+ " \n" );
         }
 
 
