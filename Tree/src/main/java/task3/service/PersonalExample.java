@@ -8,7 +8,11 @@ import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class PersonalExample {
     private static String Path = "E:\\new_doc\\Java\\Task3\\Tree\\src\\main\\java\\resource\\";
@@ -32,16 +36,16 @@ public PersonalExample(){
             String newPath = Path + xmlInOneLine;
             System.load(newPath);
 
-           // String
+
                     st2 = null;
 
             try {
                 st2.add( reader.readLine());
-// в блок  catch заключаем код по обработке исключения IOException
+
 
             } catch (IOException e) {
                 System.out.println(e.getMessage());
-// в блоке finally закрываем поток чтения
+
                 reader.close();
             }
 
@@ -56,29 +60,165 @@ for (String line : getSt() ){
         System.out.println(line);
     }
 }
-/*
+
 public static void main(String[] args) throws IOException {
 
 
-PersonalExample example=new PersonalExample( "XMLinOneLine");
+    PersonalExample example = new PersonalExample("XMLinOneLine");
 
-List<String> list= example.getSt();
+    List<String> xmlInfo = example.getSt();
+    String XMLInfo=xmlInfo.toString();
+    System.out.println("!!!+" + xmlInfo);
+    Node Xmlnode = new Node("","");
+    String s = null;
+   // while (XMLInfo!=" "){
 
-System.out.println(list);
-    XMLParser parser=new XMLParser();
-    parser.parseOpenTag(list.toString());
+    XMLParser parser = new XMLParser();
+    parser.parseOpenTag(xmlInfo.toString());
+    parser.parseCloseTag(xmlInfo.toString());
+    ArrayList<String> OpenTags = parser.getOpenTags();
+    ArrayList<String> CloseTags = parser.getCloseTags();
+    //String[] closeTags = CloseTags.split(" "); //v массив открывающихся тэгов
+    //String[] openTags = OpenTags.split(">"); //v массив закрывающихся тэгов
+
+    String XMLstring=xmlInfo.toString();
+
+  //  XMLstring=XMLstring.replace("[","");
+   // XMLstring=XMLstring.replace("]","");
+//int count=0;
+   // Pattern xmlPatternStart;
+    //Matcher xmlMatcher;
+    for (String i:OpenTags) {
+        for (String j:CloseTags) {
+
+    /*        if (count ==0){   i = 1;                j = 2;count++;} else
+            if (count ==1){                                     //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
+                i=4;j=5; count++;}else                      //аккуратнее с парсерами, может вернуться к закомментированному варианту со списком, не упрощать, переводя в строки
+                !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
+            if (count ==2) { i=2;j=3; count++;} else   //если такие параметры, то узлы правильные. почему в форе не работают?
+                if (count ==3){i=5;j=3;count++;}else //   или разобраться, почему, или сначала проанализировать файл - создать список из таких пар, а потом не перебором, а влоб из списка значение- узел
+                    if (count ==4){i=3;j=1; count++;}
+*/
+            //i=3;j=1;
+            Pattern
+                    xmlPatternStart = Pattern.compile(i);//.substring(1));
+
+          Matcher
+                    xmlMatcher = xmlPatternStart.matcher(XMLstring);
+
+
+            while (xmlMatcher.find()) {
+
+                int start = xmlMatcher.start();
+                int end = xmlMatcher.end();
+                String openTag = XMLstring.substring(start, end);
+                //     System.out.print(openTag);
+
+                if (i.substring(1).contains(j.substring(2, j.length() - 1))) {
+                    //  String openTag=openTags[i];
+
+                    System.out.println(s = XMLstring.substring(XMLstring.indexOf(i.substring(1)) + i.length() -1, XMLstring.indexOf(j.substring(0,j.length()-1))));
+                    System.out.println("++"+s);
+
+                    Xmlnode.add(i, XMLstring.substring(XMLstring.indexOf(i.substring(0)) + i.length(), XMLstring.indexOf(j.substring(0, j.length()))));
+                    XMLstring=s;
+                    //XMLstring.substring(XMLstring.indexOf(openTags[i].substring(3)) + openTags[i].length() -1, XMLstring.indexOf(closeTags[j].substring(0,closeTags[j].length()-1)))
+                    //System.out.println("!!!!!!!!!!!!!!");
+                    //LinkedList<Node> list = Xmlnode.getLinkedList();
+                    //for (Node node : list) {
+                      //  System.out.println(node.getText() + " <<<" + node.getTag());
+                        //Xmlnode.print();
+                    //}
+                    //}
+                    //  parser = new XMLParser();
+                    //parser.parseOpenTag(s);
+                    //parser.parseCloseTag(s);
+                    // XMLInfo=s;
+                }
+
+                //   OpenTags = parser.getOpenTags();
+                // CloseTags = parser.getCloseTags();
+                //closeTags = CloseTags.split(" "); //v массив открывающихся тэгов
+                //openTags = OpenTags.split(">");
+                // parser.parseOpenTag(xmlInfo.toString().substring(xmlInfo.toString().indexOf(openTags[i])+openTags[i].length()+1,xmlInfo.toString().indexOf(closeTags[j])).toString());
+                //parser.parseCloseTag(xmlInfo.toString().substring(xmlInfo.toString().indexOf(openTags[i])+openTags[i].length()+1,xmlInfo.toString().indexOf(closeTags[j])).toString());
+                //  System.out.print("\n VV"+xmlInfo.toString().substring(xmlInfo.toString().indexOf(openTags[i])+openTags[i].length()+1,xmlInfo.toString().indexOf(closeTags[j])));
+                //String s=(String) xmlInfo.toString().substring(xmlInfo.toString().indexOf(openTags[i])+openTags[i].length()+1,xmlInfo.toString().indexOf(closeTags[j]));
+            }
+
+
+        }
+
+    }
+
+    Xmlnode.print();//tag записывает нормально, то, что после tag нормально только первый раз, потом не обрезает до закрывающегося тэга
+}
+
+/*
+    }
+    if (OpenTags.contains(closeTags[i].substring(2)))// если есть соответсвующий закрывающийся тэг
+        CloseTags.indexOf()
+    CloseTags.replace(OpenTags.substring(1,OpenTags.indexOf(" "),
+
+   /* ArrayList<String>listOfOpenTags =parser.getArrayList();
+    for (String st2:listOfOpenTags) {
+        System.out.println("!!!!!+++" + st2);//c st2[1] выводит на экран открывающие тэги = по функции Node.get() вывести содержимое!!!!
+        boolean isSingleTag = (st2.lastIndexOf('<') == 0);
+    }
 
     Node xmlNode;
-    //for (String xmlInform : list) {
-      //  System.out.println(xmlInform);
+     String xmlInfo =list.toArray()[0].toString();
+   //xmlInform.split(" ");
+        System.out.println("+++++++++"+xmlInfo);
+    for (String st2:listOfOpenTags) {
+        System.out.println("!!!!!+++" + st2);//c st2[1] выводит на экран открывающие тэги = по функции Node.get() вывести содержимое!!!!
+        boolean isSingleTag = (st2.lastIndexOf('<') == 0);
+    if (isSingleTag) {
+        Pattern xmlPatternStart = Pattern.compile(st2);
+        Matcher xmlMatcher = xmlPatternStart.matcher(xmlInfo);
+        int i = 0;
+        while (xmlMatcher.find()) {
+            i++;
+            int start = xmlMatcher.start();
+            int end = xmlMatcher.end();
+            String openTag = xmlInfo.substring(start, end);
+        }
+            //String closTags=
+
+// сначала заменить в xmlInfo все таги обычные закрывающиеся закрывающимися с атрибутами.
+//xmlInfo.replace(openTag.substring(1,openTag.indexOf(" "),
+
+            ///
+
+           /* String closeTags=parser.getCloseTags();
+            System.out.println("V" + start+" " +end+" " +xmlInfo.substring(start, end)+"\n"+closeTags);
+            if (closeTags.contains(openTag.substring(2))){
+            int closeTagIndex=xmlInfo.lastIndexOf(openTag.substring(2));
+           //сли у открывающегося тэга есть закрывающийся
+//String text=xmlInfo.substring(end,
+  //      closeTagIndex);
+              //  System.out.println(openTag+"VV+++VV"+xmlInfo.substring(end,closeTagIndex));
+                xmlNode= new Node(openTag,xmlInfo.substring(end,closeTagIndex));
+
+            }
+            */
 
 
-    //}
-    //parser.parseDataTag(xmlInform);
-    //parser.parseCloseTag(xmlInform);
-    //}
-System.out.print("jkkljlk"+parser.getNodeLuist());
-    System.out.print("2jkkljlk"+parser.getNodeList());
+//        }
+        //}
 
-}*/
-}
+        //}
+
+        //}
+        //parser.parseDataTag(xmlInform);
+        //parser.parseCloseTag(xmlInform);
+        //}
+//System.out.print("jkkljlk"+parser.getNodeLuist());
+        //   System.out.print("2jkkljlk"+parser.getNodeList());
+
+
+    }
+
+//    parser.parseCloseTag(xmlInfo);}
+
+//}

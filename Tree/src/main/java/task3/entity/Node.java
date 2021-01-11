@@ -4,31 +4,34 @@ import javax.xml.bind.annotation.XmlElementWrapper;
 import java.util.LinkedList;
 import java.util.List;
 
-public class Node<T1, T2> {//abstract?
+public class Node<T1, T2, T3> {//abstract?
     private T1 tag;
     private T2 text;
+    private T3 tag2;
     //  private Node<T1, T2> child;
     // private Node<T1, T2> parent;
     private LinkedList<Node> linkedList = new LinkedList<>();
 
     public LinkedList<Node> getLinkedList() {
-        LinkedList<Node> linkedList2 = new LinkedList<>();
+        /*LinkedList<Node> linkedList2 = new LinkedList<>();
         for (Node node : linkedList) {
+            System.out.println(node.getText());
             linkedList2.add(node);
         }
-        linkedList2.add(new Node(getTag(), getText()));
-        return linkedList2;
+        linkedList2.add(new Node(getTag(), getText()));*/
+        return linkedList;
     }
 
     public Node() {
         this.tag = null;
         this.text = null;
-        linkedList.add(null);
+       // linkedList.add(null);
     }
 
-    public Node(T1 tag, T2 text) {
+    public Node(T1 tag, T2 text, T3 tag2) {
         this.tag = tag;
         this.text = text;
+        this.tag2=tag2;
 
     }
 
@@ -48,12 +51,28 @@ public class Node<T1, T2> {//abstract?
         this.text = text;
     }
 
+    public void setTag2(T3 tag2){
+        this.tag2=tag2;
+    }
+
+    public  T3 getTag2(){
+        return tag2;
+    }
     public void print() {
         LinkedList<Node> linkedList2 = (LinkedList<Node>) this.getLinkedList().clone();
         for (Node node : linkedList2) {
-            System.out.println(node.getTag() + " " + node.getText());
+            System.out.println(node.getTag() + " " + node.getText()+ "" +node.getTag2());
         }
-        System.out.println(getTag() + " " + getText());
+        //System.out.println(getTag() + " " + getText() + "" +getTag2());
+    }
+    public void printText(){
+        LinkedList<Node> linkedList2 = (LinkedList<Node>) this.getLinkedList().clone();
+        for (Node node : linkedList2) {
+            System.out.print(node.getText()+ "" );
+        }
+
+
+
     }
 
 
@@ -76,11 +95,14 @@ public class Node<T1, T2> {//abstract?
         return result;
     }*/
 
-    public void add(T1 k, T2 v) {
-        Node node = new Node(getTag(), getText());
-        linkedList.add(node);
+    public void add(T1 k, T2 v, T3 t) {
         setTag(k);
         setText(v);
+        setTag2(t);
+        Node node = new Node(getTag(), getText(),getTag2());
+
+        linkedList.add(node);
+
     }
 
     @Override
@@ -88,12 +110,12 @@ public class Node<T1, T2> {//abstract?
         LinkedList<Node> linkedList2 = (LinkedList<Node>) this.getLinkedList().clone();
         String result = "";
         for (Node node : linkedList2) {
-            result += tag.toString() + " " + text.toString() + '\n';
+            result += tag.toString() + " " + text.toString() + tag2.toString() +'\n';
         }
         return result;
     }
 
-    @Override
+    @Override //дописать с учетом 3 параметра
     public boolean equals(Object o){
         boolean result=false;
 //if ((o!=null)&&(this!=null)) {
@@ -120,36 +142,37 @@ public class Node<T1, T2> {//abstract?
       //  linkedList.add(node);
     //}
 
-    // public static void main(String[] args) {
-
-     /*  Node node2=null;
+     public static void main(String[] args) {
+         Node  node = new Node("", "","");
+     Node node2=null;
         Node node3=null;
-       boolean is=node3.equals(node2);
-       System.out.print("kl"+node2.equals(node3));
+       //boolean is=node3.equals(node2);
+       //System.out.print("kl"+node2.equals(node3));
         String tag = "<breakfast>";
         String text = "egg";
-       Node  node = new Node(tag, text);
-       Node node1= new Node(tag,text);
-       System.out.print("kl2"+node.equals(node1));
+       //Node  node = new Node(tag, text);
+         node.add(tag,text,"");
+    //   Node node1= new Node(tag,text);
+   //    System.out.print("kl2"+node.equals(node1));
         String tag1 = "<breakfast1>";
         String text1 = "egg1";
-        node.add(tag1, text1);
+        node.add(tag1, text1,"");
 
 
         String tag2 = "<breakfast2>";
         String text2 = "egg2";
-        node.add(tag2, text2);
+        node.add(tag2, text2,"");
 
         String tag3 = "<breakfast3>";
         String text3 = "egg3";
-        node.add(tag3, text3);
+        node.add(tag3, text3,"");
 
         String tag4 = "<breakfast4>";
         String text4 = "egg4";
-        node.add(tag4, text4);
+        node.add(tag4, text4,"");
         String tag5 = "<breakfast5>";
         String text5 = "egg5";
-        node.add(tag5, text5);
+        node.add(tag5, text5,"");
 
 
        //  System.out.println(node.getLinkedList());
@@ -162,7 +185,7 @@ String t= (String) node.get("<breakfast3>");
 //System.out.println(node.getLinkedList().getLast());
 
     }
-*/
+
 }
 
 
