@@ -14,6 +14,7 @@ public class Node<T1, T2> {//abstract?
     public LinkedList<Node> getLinkedList() {
         LinkedList<Node> linkedList2 = new LinkedList<>();
         for (Node node : linkedList) {
+            System.out.println(node.getText());
             linkedList2.add(node);
         }
         linkedList2.add(new Node(getTag(), getText()));
@@ -23,7 +24,7 @@ public class Node<T1, T2> {//abstract?
     public Node() {
         this.tag = null;
         this.text = null;
-        linkedList.add(null);
+       // linkedList.add(null);
     }
 
     public Node(T1 tag, T2 text) {
@@ -78,9 +79,10 @@ public class Node<T1, T2> {//abstract?
 
     public void add(T1 k, T2 v) {
         Node node = new Node(getTag(), getText());
-        linkedList.add(node);
         setTag(k);
         setText(v);
+        linkedList.add(node);
+
     }
 
     @Override
@@ -120,17 +122,18 @@ public class Node<T1, T2> {//abstract?
       //  linkedList.add(node);
     //}
 
-    // public static void main(String[] args) {
-
-     /*  Node node2=null;
+     public static void main(String[] args) {
+         Node  node = new Node("", "");
+     Node node2=null;
         Node node3=null;
-       boolean is=node3.equals(node2);
-       System.out.print("kl"+node2.equals(node3));
+       //boolean is=node3.equals(node2);
+       //System.out.print("kl"+node2.equals(node3));
         String tag = "<breakfast>";
         String text = "egg";
-       Node  node = new Node(tag, text);
-       Node node1= new Node(tag,text);
-       System.out.print("kl2"+node.equals(node1));
+       //Node  node = new Node(tag, text);
+         node.add(tag,text);
+    //   Node node1= new Node(tag,text);
+   //    System.out.print("kl2"+node.equals(node1));
         String tag1 = "<breakfast1>";
         String text1 = "egg1";
         node.add(tag1, text1);
@@ -162,7 +165,7 @@ String t= (String) node.get("<breakfast3>");
 //System.out.println(node.getLinkedList().getLast());
 
     }
-*/
+
 }
 
 
