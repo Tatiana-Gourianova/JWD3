@@ -34,7 +34,8 @@ public ArrayList<String> getCloseTags(){
             arrayList.add(st);
         }
         OpenTags=arrayList;
-
+//System.out.println(OpenTags);
+  //      System.out.println("!!!"+arrayList);
 }
 
 

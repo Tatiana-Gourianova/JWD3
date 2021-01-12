@@ -19,10 +19,9 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.sql.Array;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Stack;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -49,90 +48,115 @@ public class Main {
         List<String> xmlInfo = example.getSt();
         String XMLInfo = xmlInfo.toString();
 
-          //  System.out.println("!!!+" + xmlInfo);
-
-            //
-            Node Xmlnode = new Node("", "", "");
-            String s = null;
-            // while (XMLInfo!=" "){
-
-            XMLParser parser = new XMLParser();
-            parser.parseOpenTag(xmlInfo.toString());
-            parser.parseCloseTag(xmlInfo.toString());
-
-            ArrayList<String> OpenTags = parser.getOpenTags();
-            ArrayList<String> CloseTags = parser.getCloseTags();
-            ArrayList<String> Text = new ArrayList<>();
-
-            String XMLstring = xmlInfo.toString();
-            String XMLstring2 = xmlInfo.toString();
-            Stack<String> stringStack = new Stack<>();
-        Stack<String> stringStack2= new Stack<>();
-ArrayList<String>result=new ArrayList<>();
-            for (String i : OpenTags) {
-                for (String j : CloseTags) {
+        //  System.out.println("!!!+" + xmlInfo);
 
 
-                    Pattern
-                            xmlPatternStart = Pattern.compile(i);
-
-                    Matcher
-                            xmlMatcher = xmlPatternStart.matcher(XMLstring);
+        Node Xmlnode = new Node("", "", "");
+        String s = null;
 
 
-                    while (xmlMatcher.find()) {
+        XMLParser parser = new XMLParser();
+        parser.parseOpenTag(xmlInfo.toString());
+        parser.parseCloseTag(xmlInfo.toString());
 
-                        int start = xmlMatcher.start();
-                        int end = xmlMatcher.end();
-                        String openTag = XMLstring.substring(start, end);
-                        //   if (s==null) System.out.println("2"+i+"!+!+!"+j); отсечение содержательной части
+        ArrayList<String> OpenTags = parser.getOpenTags();
+        ArrayList<String> CloseTags = parser.getCloseTags();
+        ArrayList<String> Text = new ArrayList<>();
 
-                        if (i.substring(1).contains(j.substring(2, j.length() - 1))) {
-
-                            if ((XMLstring.length() > (XMLstring.indexOf(i.substring(1).length()))) && (i.length() > 1) && (j.length() > 1) && ((XMLstring.indexOf(i.substring(1)) + i.length() - 1) <= (XMLstring.indexOf(j.substring(0, j.length() - 1))))) {
-
-                                s = XMLstring.substring(XMLstring.indexOf(i.substring(1)) + i.length() - 1, XMLstring.indexOf(j.substring(0, j.length() - 1)));//);
-
-
-
-                                XMLstring = s;
-                               // Xmlnode.add(i, s, j);
-                              //  stringStack2= (Stack<String>) stringStack.clone();
-
-                                stringStack.push(s);
-
-                                // System.out.println("VV+" +i+ stringStack.lastElement() + j);//}
-                           //     System.out.println("VV+" +i+ stringStack.lastElement() + j);
-
-                                if (s.contains("<") == false) {
-                                    Text.add(s);
-                                    Xmlnode.add(i, s, j);
+        String XMLstring = xmlInfo.toString();
+        String XMLstring2 = xmlInfo.toString();
+        Stack<String> stringStack = new Stack<>();
+        Stack<String> stringStack2 = new Stack<>();
+        ArrayList<String> result = new ArrayList<>();
+        for (String i : OpenTags) {
+            for (String j : CloseTags) {
 
 
-                                    XMLstring = XMLstring2.replace(i + stringStack.lastElement() + j, "");
-                                    XMLstring2 = XMLstring;
+                Pattern
+                        xmlPatternStart = Pattern.compile(i);
+
+                Matcher
+                        xmlMatcher = xmlPatternStart.matcher(XMLstring);
 
 
-                                }
+                while (xmlMatcher.find()) {
+
+                    int start = xmlMatcher.start();
+                    int end = xmlMatcher.end();
+                    String openTag = XMLstring.substring(start, end);
+
+
+                    if (i.substring(1).contains(j.substring(2, j.length() - 1))) {
+
+                        if ((XMLstring.length() > (XMLstring.indexOf(i.substring(1).length()))) && (i.length() > 1) && (j.length() > 1) && ((XMLstring.indexOf(i.substring(1)) + i.length() - 1) <= (XMLstring.indexOf(j.substring(0, j.length() - 1))))) {
+
+                            s = XMLstring.substring(XMLstring.indexOf(i.substring(1)) + i.length() - 1, XMLstring.indexOf(j.substring(0, j.length() - 1)));//);
+
+
+                            XMLstring = s;
+                            // Xmlnode.add(i, s, j);
+                            //  stringStack2= (Stack<String>) stringStack.clone();
+
+                            stringStack.push(s);
+
+                            // System.out.println("VV+" +i+ stringStack.lastElement() + j);//}
+                            //     System.out.println("VV+" +i+ stringStack.lastElement() + j);
+
+                            if (s.contains("<") == false) {
+                                Text.add(s);
+                                Xmlnode.add(i, s, j);
+
+
+                                XMLstring = XMLstring2.replace(i + stringStack.lastElement() + j, "");
+                                XMLstring2 = XMLstring;
+
+
                             }
-
-                        }
                         }
 
-
+                    }
                 }
 
-            }
-        Xmlnode.printText();
-
-
-int i=0;
-while (stringStack.toArray()[i].toString().contains("<")==true) {
-    stringStack2.push(stringStack.toArray()[i].toString());i++;
 
             }
-        System.out.println( stringStack2.toArray()[0]);}//в stringStack2 первый элемент - наш файл с содержательной частью!!!!!
+
         }
+
+       // System.out.println("!++");
+        Xmlnode.printText();//осталось проиндексировать открывающие тэги по порядку по OpenTags и выводить из Node те, у которых меньше индексы
+     //   System.out.println("!!!!+++");
+        LinkedList<Node> linkedList = Xmlnode.getLinkedList();
+        //linkedList.peekFirst();
+        Node node = new Node();//такой же список, что и в Xmlnode
+        node.setLinkedList(linkedList);
+
+        //System.out.println("++");
+        //node.printText();
+        //System.out.println("++");
+
+        System.out.println();
+
+
+       //Xmlnode.getLinkedList().offerFirst(Xmlnode.get("<name>"));//.peekFirst();
+        String[] array = {}; // конвертируем ArrayList в массив
+        array = OpenTags.toArray(new String[OpenTags.size()]);
+        for (int i = 0; i < array.length; i++) {
+            if (Xmlnode.getWithDelete(array[i])!=null)
+            System.out.print( Xmlnode.getWithDelete(array[i])+" ");
+        }
+        System.out.println();
+      //  Xmlnode.printText();
+
+    }
+}
+            /*HashMap<Integer,String>  hashMapText = new HashMap<>();
+        for (int i=0; i<Xmlnode.getLinkedList().size();i++){
+            hashMapText.put(i,Xmlnode.getText().toString());
+        }
+        System.out.println(hashMapText);
+        }*/
+
+//    }
 
 
 //System.out.println( stringStack2);

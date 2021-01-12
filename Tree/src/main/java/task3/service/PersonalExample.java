@@ -1,7 +1,6 @@
 package task3.service;
 
-//import com.sun.deploy.xml.BadTokenException;
-//import com.sun.deploy.xml.XMLParser;
+
 import task3.entity.Node;
 import task3.service.impl.XMLParser;
 import java.io.*;
@@ -28,7 +27,7 @@ public class PersonalExample {
     }
 
     public PersonalExample(String xmlInOneLine) throws IOException {
-//File filePath=new File(Path,xmlInOneLine);
+
         List<String> st2;
         if (Files.isReadable(Paths.get(Path, xmlInOneLine))) {
 
@@ -54,7 +53,7 @@ public class PersonalExample {
             System.out.print(st2);
         }
 
-//    return st2;
+
         this.st = st2;
     }
 
@@ -74,7 +73,7 @@ public class PersonalExample {
         System.out.println("!!!+" + xmlInfo);
         Node Xmlnode = new Node("", "", "");
         String s = null;
-        // while (XMLInfo!=" "){
+
 
         XMLParser parser = new XMLParser();
         parser.parseOpenTag(xmlInfo.toString());
@@ -88,21 +87,10 @@ public class PersonalExample {
         String XMLstring2=xmlInfo.toString();
         Stack<String> stringStack = new Stack<>();
 
-//int count=0;
-        // Pattern xmlPatternStart;
-        //Matcher xmlMatcher;
         for (String i : OpenTags) {
             for (String j : CloseTags) {
 
-    /*        if (count ==0){   i = 1;                j = 2;count++;} else
-            if (count ==1){                                     //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
-                i=4;j=5; count++;}else                      //аккуратнее с парсерами, может вернуться к закомментированному варианту со списком, не упрощать, переводя в строки
-                !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
-            if (count ==2) { i=2;j=3; count++;} else   //если такие параметры, то узлы правильные. почему в форе не работают?
-                if (count ==3){i=5;j=3;count++;}else //   или разобраться, почему, или сначала проанализировать файл - создать список из таких пар, а потом не перебором, а влоб из списка значение- узел
-                    if (count ==4){i=3;j=1; count++;}
-*/
-       //         i="<name>";j="</name>";//            3;j=1;
+
                 Pattern
                         xmlPatternStart = Pattern.compile(i);//.substring(1));
 
@@ -144,11 +132,9 @@ if( (XMLstring.length()>(XMLstring.indexOf(i.substring(1).length())))&&(i.length
 
 
             }
-           // if (s==null) {break;}
+
         }
 
-        Xmlnode.print();
-        //Xmlnode.printText();
     }
 
 }

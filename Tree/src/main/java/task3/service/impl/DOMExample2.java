@@ -167,7 +167,7 @@ public class DOMExample2 {
                 System.out.print("\n" + st2[0]+". ");
                 continue;
             }
-            System.out.print(st);
+            System.out.print(st+" ");
         }
         System.out.println();
     }

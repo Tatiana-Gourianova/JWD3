@@ -1,6 +1,8 @@
 package task3.entity;
 
 import javax.xml.bind.annotation.XmlElementWrapper;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -8,9 +10,14 @@ public class Node<T1, T2, T3> {//abstract?
     private T1 tag;
     private T2 text;
     private T3 tag2;
+   private int size;
     //  private Node<T1, T2> child;
     // private Node<T1, T2> parent;
     private LinkedList<Node> linkedList = new LinkedList<>();
+    public void setLinkedList(LinkedList<Node> linkedList) {
+        this.linkedList=linkedList;
+
+    }
 
     public LinkedList<Node> getLinkedList() {
         /*LinkedList<Node> linkedList2 = new LinkedList<>();
@@ -25,10 +32,12 @@ public class Node<T1, T2, T3> {//abstract?
     public Node() {
         this.tag = null;
         this.text = null;
+      //  this.linkedList = new LinkedList<>();
        // linkedList.add(null);
     }
 
     public Node(T1 tag, T2 text, T3 tag2) {
+      //  this.linkedList = new LinkedList<>();
         this.tag = tag;
         this.text = text;
         this.tag2=tag2;
@@ -63,6 +72,9 @@ public class Node<T1, T2, T3> {//abstract?
         for (Node node : linkedList2) {
             System.out.println(node.getTag() + " " + node.getText()+ "" +node.getTag2());
         }
+
+
+
         //System.out.println(getTag() + " " + getText() + "" +getTag2());
     }
     public void printText(){
@@ -77,15 +89,58 @@ public class Node<T1, T2, T3> {//abstract?
     }
 
 
+    public void print(int[] index) {
+        LinkedList<Node> linkedList2 = (LinkedList<Node>) this.getLinkedList().clone();
+        ArrayList<String> arrayList = new ArrayList<>();
+        int j = 0;
+        for (Node node : linkedList2) {
+            arrayList.add(node.text.toString());
+        }
+        String[] array = {}; // конвертируем ArrayList в массив
+        array = arrayList.toArray(new String[arrayList.size()]);
+        HashMap<Integer, String> hashMapText = new HashMap<>();
+        if (index.length <= size) {
+            for (Integer i : index) {
+                hashMapText.put(i, array[i]);
+            }
+            System.out.println(hashMapText);
+            //for (Node node : linkedList2) {
+            //arrayList
+
+            //  System.out.println(node.getTag() + " " + node.getText()+ "" +node.getTag2());
+        }
+    }
+
    public T2 get(T1 k) {
+        ArrayList<String> arrayList=new ArrayList<>();
+        //arrayList=getLinkedList().toArray();
+       LinkedList<Node>list=linkedList;
+       list.peekLast();//.peekFirst();
+     //  list.
         T2 result = null;
-        for (Node node : linkedList) {
+        for (Node node : list) {
             if (node.tag == k)
                 result = (T2) node.text;
         }
         return result;
     }
 
+    public T2 getWithDelete(T1 k) {
+        ArrayList<String> arrayList=new ArrayList<>();
+        //arrayList=getLinkedList().toArray();
+        LinkedList<Node>list=new LinkedList<>();
+        list=linkedList;
+        list.peekLast();//.peekFirst();
+        //  list.
+        T2 result = null;
+        for (Node node : list) {
+            if (node.tag == k){
+                result = (T2) node.text;
+            list.remove(result);}
+        }
+        this.linkedList=list;
+        return result;
+    }
 
    /* public T1 get(T2 v) {
         T1 result = null;
@@ -103,7 +158,7 @@ public class Node<T1, T2, T3> {//abstract?
         Node node = new Node(getTag(), getText(),getTag2());
 
         linkedList.add(node);
-
+        size++;
     }
 
     @Override
