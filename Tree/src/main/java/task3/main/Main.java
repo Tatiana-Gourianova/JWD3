@@ -24,6 +24,11 @@ import java.sql.SQLException;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Stream;
+
+import static java.lang.System.*;
+import static java.util.stream.Collectors.toList;
+import static jdk.nashorn.internal.objects.NativeArray.forEach;
 
 public class Main {
 
@@ -41,7 +46,7 @@ public class Main {
         int count = 0;
 
 
-        System.out.println();
+        out.println();
 
         PersonalExample example = new PersonalExample("XMLinOneLine");
 
@@ -134,27 +139,159 @@ public class Main {
         //node.printText();
         //System.out.println("++");
 
-        System.out.println();
+        out.println();
 
 
        //Xmlnode.getLinkedList().offerFirst(Xmlnode.get("<name>"));//.peekFirst();
         String[] array = {}; // конвертируем ArrayList в массив
-        array = OpenTags.toArray(new String[OpenTags.size()]);
-        for (int i = 0; i < array.length; i++) {
-            if (Xmlnode.getWithDelete(array[i])!=null)
-            System.out.print( Xmlnode.getWithDelete(array[i])+" ");
-        }
-        System.out.println();
-      //  Xmlnode.printText();
+        LinkedList<Node> list=new LinkedList<>();
+        list=Xmlnode.getLinkedList();
 
-    }
-}
-            /*HashMap<Integer,String>  hashMapText = new HashMap<>();
-        for (int i=0; i<Xmlnode.getLinkedList().size();i++){
-            hashMapText.put(i,Xmlnode.getText().toString());
+        array = OpenTags.toArray(new String[OpenTags.size()]);
+
+
+  //      HashMap<Integer,String>  hashMapText3 = new HashMap<>();
+
+        HashMap<String,String>  hashMapText4 = new HashMap<>();
+    //    for (int i = 0; i < array.length; i++) {
+      //      hashMapText2.put(i,array[i]);}
+//list=Xmlnode.getLinkedList();
+
+int j=0;
+        Node node2;//=new Node();
+while ((list!=null)&&(j<list.size())) {
+    for (int i = 0; i < array.length; i++) {
+
+        if(list.isEmpty()){break;}else{
+        if (array[i] == list.peek().getTag().toString()) {
+
+            hashMapText4.put(list.peek().getWithDelete(array[i], list).toString(), i + array[i]);//}
         }
-        System.out.println(hashMapText);
-        }*/
+    }
+  }
+}
+        System.out.println(hashMapText4);
+        HashMap<Integer,String>  hashMapText2 = new HashMap<>();
+
+        for (int i = 0; i < array.length; i++) {
+
+        hashMapText2.put(i,array[i]);
+        }
+        String st=null;
+        for (int i = 0; i < array.length; i++) {
+            for (Map.Entry<String, String> entry : hashMapText4.entrySet()) {
+                if (entry.getKey() == array[i]) {
+                    st = String.valueOf(i);
+                    entry.setValue(st);
+                }
+            }
+        }
+            //    out.println("Key : " + entry.getKey() + " Value : "+ entry.getValue());
+                //hashMapText=entry;
+
+                boolean found = true;
+             //   for (int i = 0; i < array.length; i++) {
+                for (HashMap.Entry<String, String> criteriaEntry : hashMapText4.entrySet()) {
+               //     if (criteriaEntry.getKey()==array[i]) //&& hashMapText4.get(criteriaEntry.getKey()).equals(criteriaEntry.getValue())))
+                        //found = false;
+                    System.out.println(":|"+criteriaEntry.getKey());
+                    out.println("Key : " + criteriaEntry.getKey() + " Value : "+  criteriaEntry.getValue());
+                }
+
+            out.println();
+          //  hashMapText4=
+        //}
+
+        System.out.println(hashMapText4);
+
+
+
+
+
+
+    /*    set.setValue("node2.getText().toString()");
+        java.util.HashMap.Entry < Integer, String > set2 = new java.util.HashMap.Entry < Integer, String> ()
+        {
+
+            @Override
+            public Integer getKey ()
+            {
+                return null ;
+            }
+
+            @Override
+            public String getValue ()
+            {
+                return null ;
+            }
+
+            @Override
+            public String setValue ( String value )
+            {
+                return null ;
+            }
+        };
+            //set=hashMapText3.entrySet();
+        out.println(hashMapText3.entrySet()+" lkl"+hashMapText3.keySet()+" gjgj "+set.getValue()+" jkjl "+ set.getKey());
+
+        for (Map.Entry<Integer,String> entry : hashMapText3.entrySet())
+        {
+            out.println("Key : " + entry.getKey() + " Value : "+ entry.getValue());
+        }
+        out.println();
+
+        Stream<Map.Entry<Integer, String>> sorted;// array[2])//comparingByValue().compare(((Comparator<? super HashMap.Entry<Integer, String>>) hashMapText2.entrySet())
+        sorted = hashMapText3.entrySet().stream()
+                .sorted(Map.Entry.<Integer, String>comparingByValue(String::compareTo));
+         //.forEach(out::println);
+
+        System.out.println(":"+sorted.toString());
+      //  hashMapText3= (HashMap<Integer, String>) sorted.forEach();
+        for (Map.Entry<Integer,String> entry : hashMapText2.entrySet())
+        {
+            out.println("Key : " + entry.getKey() + " Value : "+ entry.getValue());
+        }
+        out.println();
+
+        hashMapText3.entrySet().stream()
+                .sorted(Map.Entry.<Integer, String>comparingByValue(Comparator.reverseOrder()))//thenComparing((Comparator<? super HashMap.Entry<Integer, String>>) hashMapText2.entrySet()))
+                .forEach(out::println);
+
+        out.println();
+
+        /*
+                HashMap<String,String>  hashMapText = new HashMap<>();
+        Node node1=null;
+        for (int i = 0; i < array.length; i++) {
+             node1=new Node(array[i],node.get(array[i].trim()),"</"+array[i].substring(1));
+            //System.out.println(node1.p);
+            node1.print();
+            if (node1!=null)
+
+            System.out.println("II"+array[i]+ node.get(array[i])+node.getNext(node1));
+        }
+
+        /*LinkedList<Node> list=new LinkedList<>();
+                list=Xmlnode.getLinkedList();
+                for (Node node2:list) {
+                    System.out.println(node2.getTag());
+                }*/
+        //.printText();
+        //Xmlnode.printText();
+      //  xmlnode.
+
+/*
+        LinkedList<Node> list2=new LinkedList<>();
+        list2=Xmlnode.getLinkedList();*/
+       /*
+        for (Node node2:list2){
+            hashMapText.put(3,node2.getText().toString());
+        }
+        System.out.println(hashMapText2);*/
+    }
+    }
+
+
 
 //    }
 

@@ -67,6 +67,16 @@ public class Node<T1, T2, T3> {//abstract?
     public  T3 getTag2(){
         return tag2;
     }
+
+    public Node getNext(Node node){
+        for (Node node2 : linkedList)
+            if (node2.equals(node))
+               node=node2;
+
+
+    return node;
+    }
+
     public void print() {
         LinkedList<Node> linkedList2 = (LinkedList<Node>) this.getLinkedList().clone();
         for (Node node : linkedList2) {
@@ -125,18 +135,17 @@ public class Node<T1, T2, T3> {//abstract?
         return result;
     }
 
-    public T2 getWithDelete(T1 k) {
+    public T2 getWithDelete(T1 k,LinkedList<Node> nodeLinkedList) {
         ArrayList<String> arrayList=new ArrayList<>();
         //arrayList=getLinkedList().toArray();
-        LinkedList<Node>list=new LinkedList<>();
-        list=linkedList;
-        list.peekLast();//.peekFirst();
+        LinkedList<Node>list=nodeLinkedList;
+    //    list.peekLast();//.peekFirst();
         //  list.
         T2 result = null;
         for (Node node : list) {
             if (node.tag == k){
                 result = (T2) node.text;
-            list.remove(result);}
+            list.remove(node);break;}
         }
         this.linkedList=list;
         return result;
@@ -238,6 +247,9 @@ String t= (String) node.get("<breakfast3>");
         //linkedList2=node.getChildren();
        System.out.println("(:"+t);
        node.print();
+          t= (String) node.getWithDelete("<breakfast3>",node.getLinkedList());
+         System.out.println("(:"+t);
+         node.print();
 //System.out.println(node.getLinkedList().getLast());
 
     }
