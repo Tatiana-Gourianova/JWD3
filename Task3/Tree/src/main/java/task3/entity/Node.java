@@ -91,7 +91,7 @@ public class Node<T1, T2, T3> {//abstract?
         LinkedList<Node> linkedList2 = (LinkedList<Node>) this.getLinkedList().clone();
         for (Node node : linkedList2) {
             if (node.text.toString().contains("<")!=true)
-            System.out.print(" "+ node.getText()+ " \n" );
+            System.out.print(" "+ node.getText()+ "\t" );
         }
 
 
@@ -113,7 +113,7 @@ public class Node<T1, T2, T3> {//abstract?
             for (Integer i : index) {
                 hashMapText.put(i, array[i]);
             }
-            System.out.println(hashMapText);
+            System.out.print("\t"+hashMapText+"\t");
             //for (Node node : linkedList2) {
             //arrayList
 
