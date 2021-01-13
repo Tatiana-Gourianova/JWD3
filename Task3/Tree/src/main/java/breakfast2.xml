@@ -1,0 +1,13 @@
+<breakfast-menu>
+    <foods id="1">
+        <name>Belgian Waffles</name>
+        <price>$5.95</
+                price>
+    </foods>
+    <food id="2">
+        <name>Strawberry 
+Belgian Waffles</
+name>
+        <price>$7.988</price>
+    </food>
+</breakfast-menu>

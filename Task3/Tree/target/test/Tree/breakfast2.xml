@@ -1,0 +1,8 @@
+<party>
+    <field name="name">Олег </field>
+<field name="birthdate">02.01.1980</field>
+<attribute type="PHONE" rawId="AL.2.PH.1">
+<field name="type">MOBILE</field>
+<field name="number">+7 916 1234567</field>
+</attribute>
+        </party>
