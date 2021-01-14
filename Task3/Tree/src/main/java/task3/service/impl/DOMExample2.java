@@ -15,6 +15,7 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.regex.Pattern;
 
 public class DOMExample2 {
     private static String Path = "E:\\new_doc\\Java\\Task3\\Tree\\src\\main\\java\\resource\\";
@@ -42,6 +43,33 @@ public class DOMExample2 {
         File file=new File(String.valueOf(path));
         Scanner scanner=new Scanner(file);
         String s = scanner.nextLine();
+        int info=0;
+        if (s.contains("<?")){
+           info=1;
+
+        }
+        // Считывание имени тега для поиска его в файле
+        //  String element =reader.readLine();
+        String[] st2=s.split("> ");
+        int attr=0;
+        if (st2[info].contains(">")) attr=1;
+        String string=st2[info].substring(1,st2[info].length()-attr);
+
+        //     string=string.replace("<","\"");
+        //  string=string.replace(">","\"");
+
+        String element =string;//reader.readLine();
+        //string;
+        //"breakfast-menu";
+
+        //reader.readLine();
+        //st2[0].substring(1,st2[0].length()-1);//"breakfast-menu";
+//System.out.println(element);
+
+
+        //Pattern field_name_pattern = Pattern.compile(" ");
+
+
 
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
@@ -63,21 +91,6 @@ public class DOMExample2 {
         Document document = builder.parse(file);
 
 
-// Считывание имени тега для поиска его в файле
-      //  String element =reader.readLine();
-        String[] st2=s.split(" ");
-    String string=st2[0].substring(1,st2[0].length()-1);
-
-   //     string=string.replace("<","\"");
-     //  string=string.replace(">","\"");
-
-       String element =string;//reader.readLine();
-                //string;
-                //"breakfast-menu";
-
-                //reader.readLine();
-                //st2[0].substring(1,st2[0].length()-1);//"breakfast-menu";
-System.out.println(element);
 
 // Получение списка элементов, однако для удобства будем рассматривать только первое совпадение в документе.
 

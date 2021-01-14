@@ -1,10 +1,7 @@
 package task3.entity;
 
 import javax.xml.bind.annotation.XmlElementWrapper;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 public class Node<T1, T2, T3> {//abstract?
     private T1 tag;
@@ -91,7 +88,7 @@ public class Node<T1, T2, T3> {//abstract?
         LinkedList<Node> linkedList2 = (LinkedList<Node>) this.getLinkedList().clone();
         for (Node node : linkedList2) {
             if (node.text.toString().contains("<")!=true)
-            System.out.print(" "+ node.getText()+ " \n" );
+            System.out.print(" "+ node.getText()+ "\t" );
         }
 
 
@@ -113,7 +110,7 @@ public class Node<T1, T2, T3> {//abstract?
             for (Integer i : index) {
                 hashMapText.put(i, array[i]);
             }
-            System.out.println(hashMapText);
+            System.out.print("\t"+hashMapText+"\t");
             //for (Node node : linkedList2) {
             //arrayList
 
@@ -136,9 +133,11 @@ public class Node<T1, T2, T3> {//abstract?
     }
 
     public T2 getWithDelete(T1 k,LinkedList<Node> nodeLinkedList) {
-        ArrayList<String> arrayList=new ArrayList<>();
+
+
         //arrayList=getLinkedList().toArray();
         LinkedList<Node>list=nodeLinkedList;
+
     //    list.peekLast();//.peekFirst();
         //  list.
         T2 result = null;
@@ -181,10 +180,29 @@ public class Node<T1, T2, T3> {//abstract?
     }
 
     @Override //дописать с учетом 3 параметра
-    public boolean equals(Object o){
+    public boolean equals(Object obj){
         boolean result=false;
+        ArrayList<String> arrayList=new ArrayList<>();
+        //arrayList=getLinkedList().toArray();
+        //LinkedList<Node>list=getLinkedList();
+
+            if (obj == null || obj.getClass() != this.getClass())
+                return false;
+            //Node node = (Node) obj;
+
+        Iterator<Object> criterias= (Iterator<Object>) obj;
+        while (criterias.hasNext()) {
+
+            for (Node node : linkedList) {
+                Object criteria = criterias.next();
+
+
+                if (criteria == tag) result = true;
+                return false;
+            }
+        }
 //if ((o!=null)&&(this!=null)) {
-    Node node = (Node) o;
+    /*Node node = (Node) o;
 
 
     if ((o == null) && ((tag == null) || (text == null) && (linkedList == null))) {
@@ -197,6 +215,7 @@ public class Node<T1, T2, T3> {//abstract?
     {result=true;
         }
 
+    */
         return result;
     }
 
