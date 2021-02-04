@@ -1,8 +1,8 @@
-package task3.entity;
+package task3.entity;// выучи, как правильно размещать ява-код в пакетах, склько уровней должно быть минимально
 
-import javax.xml.bind.annotation.XmlElementWrapper;
+import javax.xml.bind.annotation.XmlElementWrapper;// зачем тебе этот класс при решении данной задачи
 import java.util.*;
-
+// как я понимаю, код этого класса не дописан
 public class Node<T1, T2, T3> {//abstract?
     private T1 tag;
     private T2 text;
@@ -66,7 +66,7 @@ public class Node<T1, T2, T3> {//abstract?
     }
 
     public Node getNext(Node node){
-        for (Node node2 : linkedList)
+        for (Node node2 : linkedList)// JAVA CODE CONVENTION
             if (node2.equals(node))
                node=node2;
 
@@ -74,7 +74,7 @@ public class Node<T1, T2, T3> {//abstract?
     return node;
     }
 
-    public void print() {
+    public void print() {// Таня, уже третье задание, а ты до сих пор вывод на консоль пишешь где угодно
         LinkedList<Node> linkedList2 = (LinkedList<Node>) this.getLinkedList().clone();
         for (Node node : linkedList2) {
             System.out.println(node.getTag() + " " + node.getText()+ "" +node.getTag2());
@@ -180,7 +180,7 @@ public class Node<T1, T2, T3> {//abstract?
     }
 
     @Override //дописать с учетом 3 параметра
-    public boolean equals(Object obj){
+    public boolean equals(Object obj){// это не метод - это бред
         boolean result=false;
         ArrayList<String> arrayList=new ArrayList<>();
         //arrayList=getLinkedList().toArray();
@@ -219,7 +219,7 @@ public class Node<T1, T2, T3> {//abstract?
         return result;
     }
 
-    public void setAtributes(List<String> atributes) {
+    public void setAtributes(List<String> atributes) {// ??????
     }
 
     //public void add(Node node) {
