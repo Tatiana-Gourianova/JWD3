@@ -5,7 +5,7 @@ import task3.service.Criteria;
 
 
 
-public class MenueDAOImpl {
+public class MenueDAOImpl {// как я вижу - задание не решено
 
 
     public Menue fix(Criteria criteria) {
