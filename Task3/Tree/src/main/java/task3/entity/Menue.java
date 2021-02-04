@@ -1,4 +1,4 @@
 package task3.entity;
 
-public class Menue {
+public class Menue {// не вижу решения
 }
